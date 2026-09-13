@@ -22,10 +22,9 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: npm
 
       - name: Instalar dependencias
-        run: npm ci
+        run: npm install
 
       - name: Construir aplicación
         run: npm run build
@@ -33,10 +32,10 @@ jobs:
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Preparar archivos
+      - name: Preparar archivos para publicación
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './dist'
+          path: ./dist
 
   deploy:
     environment:
@@ -51,6 +50,6 @@ jobs:
       id-token: write
 
     steps:
-      - name: Publicar aplicación
+      - name: Publicar en GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
